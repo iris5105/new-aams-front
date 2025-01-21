@@ -9,7 +9,7 @@ const Header = () => {
       <Layout
       style={{
         display: 'flex',
-        height : '50px',
+        height : '60px',
         backgroundColor : '#3f51b5',
         paddingLeft : '10px',
         paddingRight : '10px'
@@ -20,8 +20,8 @@ const Header = () => {
       >
         <Flex horizontal justify='flex-start' align='center'>
           <div className="demo-logo" />
-          <Title  level = {2} italic style={{color : 'yellow', marginTop : '0'}}>A</Title>
-          <Title  level = {4} style={{color : 'white', marginTop : '0'}}>dvanced Asset Management System.</Title>
+          <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
+          <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
         </Flex>
         <Flex horizontal justify='flex-start' align='center'>
           <Text style={{color : 'white'}}>사용자 </Text>
