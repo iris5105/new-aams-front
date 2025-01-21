@@ -1,39 +1,53 @@
 import React from 'react';
 import { Layout, Typography, Flex} from 'antd';
-import Icon, {UserOutlined} from '@ant-design/icons';
-const { Text, Link, Title  } = Typography;
+import {UserOutlined} from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom'; // useNavigate 임포트
+
+const { Text, Title  } = Typography;
+
+
 
 const Header = () => {
+    const navigate = useNavigate();
+    const Logout = () =>{
 
-  return (
-      <Layout
-      style={{
-        display: 'flex',
-        height : '60px',
-        backgroundColor : '#3f51b5',
-        paddingLeft : '10px',
-        paddingRight : '10px'
-      }}
-    >
-      <Flex horizontal justify='space-between' align='center'
-      
-      >
-        <Flex horizontal justify='flex-start' align='center'>
-          <div className="demo-logo" />
-          <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
-          <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
-        </Flex>
-        <Flex horizontal justify='flex-start' align='center'>
-          <Text style={{color : 'white'}}>사용자 </Text>
-          <Text style={{color : 'white'}}>님반갑습니다.</Text>
-        </Flex>
-        <Flex horizontal justify='flex-start' align='center'>
-          <UserOutlined style={{ fontSize : '18px',color : 'white'}}/>
-          <Text style={{ fontSize : '18px',color : 'white'}}>Logout</Text>
-        </Flex>
-        
-      </Flex>
-    </Layout>
+
+    sessionStorage.removeItem('user');  //세션에서 유저 삭제 예시 user에 대한 key값으로 변경 필요
+
+    // '/' 페이지로 이동동
+    navigate('/');
+    }
+
+    return (
+        <Layout
+            style={{
+                display: 'flex',
+                height : '60px',
+                backgroundColor : '#3f51b5',
+                paddingLeft : '10px',
+                paddingRight : '10px'
+             }}
+        >
+            <Flex horizontal justify='space-between' align='center'>
+                <Flex horizontal justify='flex-start' align='center'>
+                    <div className="demo-logo" />
+                    <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
+                    <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
+                </Flex>
+                <Flex horizontal justify='flex-start' align='center'>
+                    <Text style={{color : 'white'}}>사용자 </Text>
+                    <Text style={{color : 'white'}}>님반갑습니다.</Text>
+                </Flex>
+                <Flex horizontal justify='flex-start' align='center'>
+                    {/* onClick에서 함수 호출을 인라인으로 처리 */}
+                    <div id='Logout' onClick={()=>Logout()}>
+                        <UserOutlined style={{ fontSize : '18px',color : 'white'}}/>
+                        <Text style={{ fontSize : '18px',color : 'white'}}>Logout</Text>
+                    </div>
+                </Flex>
+                
+            </Flex>
+        </Layout>
   )
 }
 
