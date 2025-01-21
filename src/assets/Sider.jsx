@@ -30,15 +30,15 @@ export default function Sider(){
             backgroundColor : 'white'
           }}
     >
-          <Menu
-                  mode="inline"
-                  defaultSelectedKeys={['1']}
-                  defaultOpenKeys={['sub1']}
-                  style={{
-                    borderRight: 0,
-                  }}
-                  items={items2}
-                />
+        <Menu
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            defaultOpenKeys={['sub1']}
+            style={{
+            borderRight: 0,
+            }}
+            items={items2}
+        />
     </Layout>
 
   )
