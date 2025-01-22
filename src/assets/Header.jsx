@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Typography, Flex} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom'; // useNavigate 임포트
+import { useNavigate, Link } from 'react-router-dom'; // useNavigate 임포트
 
 const { Text, Title  } = Typography;
 
@@ -9,13 +9,13 @@ const { Text, Title  } = Typography;
 
 const Header = () => {
     const navigate = useNavigate();
-    const Logout = () =>{
+    const handleLogOut = () => {
+        navigate('/Login');
+    }
 
-
-    sessionStorage.removeItem('user');  //세션에서 유저 삭제 예시 user에 대한 key값으로 변경 필요
-
-    // '/' 페이지로 이동동
-    navigate('/');
+    // 로고,시스템명 클릭스 '/'로 이동동
+    const handleLogo = () => {
+        navigate('/main');
     }
 
     return (
@@ -28,19 +28,19 @@ const Header = () => {
                 paddingRight : '10px'
              }}
         >
-            <Flex horizontal justify='space-between' align='center'>
-                <Flex horizontal justify='flex-start' align='center'>
+            <Flex horizontal={true} justify='space-between' align='center'>
+                <Flex horizontal={true} justify='flex-start' align='center' onClick={handleLogo}>
                     <div className="demo-logo" />
                     <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
                     <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
                 </Flex>
-                <Flex horizontal justify='flex-start' align='center'>
+                <Flex horizontal={true} justify='flex-start' align='center'>
                     <Text style={{color : 'white'}}>사용자 </Text>
                     <Text style={{color : 'white'}}>님반갑습니다.</Text>
                 </Flex>
-                <Flex horizontal justify='flex-start' align='center'>
+                <Flex horizontal={true} justify='flex-start' align='center'>
                     {/* onClick에서 함수 호출을 인라인으로 처리 */}
-                    <div id='Logout' onClick={()=>Logout()}>
+                    <div id='Logout' onClick={handleLogOut}>
                         <UserOutlined style={{ fontSize : '18px',color : 'white'}}/>
                         <Text style={{ fontSize : '18px',color : 'white'}}>Logout</Text>
                     </div>
