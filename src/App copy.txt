@@ -1,0 +1,111 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Layout, Typography, Splitter } from 'antd';
+import dayjs from 'dayjs';
+import './App.css';
+import Login from './assets/Login';
+import Header from './assets/Header';
+import Sider from './assets/Sider';
+import Menu from './pages/test/Menu';
+import Menu1 from './pages/test/Menu1';
+import Menu2 from './pages/test/Menu2';
+import Menu3 from './pages/test/Menu3';
+import BscDatePicker from './component/datePicker/BasicDatePicker';
+import RangeDatePicker from './component/datePicker/RangeDatePicker';
+import BscBtn from './component/button/Basicbutton';
+import Filter from './component/filters/Filter'
+// import { DatePicker, RangePicker} from './component/datePicker/BasicDatePicker';
+
+
+const { Text } = Typography;
+
+
+function App() {
+  const [logInStat, setLogInStat] = useState(false);
+
+  useEffect(() => {
+    const sessionLogin = sessionStorage.getItem('logInStat') === 'true';
+    setLogInStat(sessionLogin);
+  }, []);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('logInStat');
+    setLogInStat(false); // 상태 업데이트
+  };
+
+  var now = dayjs();
+  var afterDay = now.add(3, 'day');
+  console.log('now :' + now.format('YYYY-MM-DD'));
+  console.log('now :' + afterDay.format('YYYY-MM-DD'));
+
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* 로그인 경로 */}
+        <Route
+          path="/Login"
+          element={
+            logInStat ? <Navigate to="/" replace /> : <Login onLogin={() => setLogInStat(true)} />
+          }
+        />
+        
+        {/* 로그인 후 화면 */}
+        <Route
+          path="*"
+          element={
+            logInStat ? (
+              <Layout>
+                <Header onLogout={handleLogout} />
+                <Layout style={{ display: 'flex', flexDirection: 'row' }}>
+                  <Splitter style={{ height: 'auto' }}>
+                    <Splitter.Panel defaultSize="20%" min="10%" max="70%">
+                      <Sider style={{ background: 'white' }} />
+                    </Splitter.Panel>
+
+                    <Splitter.Panel
+                      style={{
+                        margin: '16px',
+                        padding: 24,
+                        background: 'white',
+                        borderRadius: 20,
+                        width: '80%',
+                      }}
+                    >
+                      <Routes>
+                        <Route path="/" element={
+                                                  <Layout style = {{ height : '100%'}}>
+                                                    <Layout style={{width : 300 }}>
+                                                      <Text id="Example">Components Sample</Text>
+                                                      <Text>Button</Text>
+                                                      <BscBtn/>
+                                                      <Text>일자 단일 선택</Text>
+                                                      <BscDatePicker/>
+                                                      <Text>일자 기간 선택</Text>
+                                                      <RangeDatePicker/>
+                                                      <Filter/>
+                                                    </Layout>
+                                                  </Layout>
+
+                        } />
+                        <Route path="Menu" element={<Menu />} />
+                        <Route path="Menu1" element={<Menu1 />} />
+                        <Route path="Menu2" element={<Menu2 />} />
+                        <Route path="Menu3" element={<Menu3 />} />
+                        {/* 추가적인 경로를 정의 */}
+                      </Routes>
+                    </Splitter.Panel>
+                  </Splitter>
+                </Layout>
+              </Layout>
+            ) : (
+              <Navigate to="/Login" replace />
+            )
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
