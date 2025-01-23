@@ -22,7 +22,7 @@ const boxStyle = {
 const Login = () => {
     const navigate = useNavigate();
     const handleLogin = () => {
-        sessionStorage.setItem('logInStat', 'true'); // 로그인 상태 저장
+        sessionStorage.setItem('logInStat', true); // 로그인 상태 저장
         navigate('/main')
       };
 return(
@@ -69,7 +69,7 @@ return(
                 </Form.Item>
 
                 <Form.Item label={null}>
-                    <Button id='logIn' type="primary" onClick={handleLogin}>
+                    <Button type="primary" onClick={handleLogin}>
                     Log In
                     </Button>
                 </Form.Item>

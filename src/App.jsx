@@ -24,7 +24,7 @@ function App() {
     console.log('loginStat : '+logInStat);
     setLogInStat(sessionLogin);
   }, []);
-
+  console.log('loginStat : '+logInStat);
   var now = dayjs();
   var afterDay = now.add(3, 'day');
   console.log('now :' + now.format('YYYY-MM-DD'));
@@ -36,7 +36,8 @@ function App() {
         {/* 로그인 경로 */}
         <Route path="/login" element={<Login/>}/>
          {/* 로그인 후 화면 */}
-         <Route path="/" element={logInStat ? <Main /> : <Navigate to="/login" />}>
+         {/* <Route path="/main" element={logInStat ? <Main /> : <Navigate to="/login" />}> */}
+         <Route path="/" element={ <Main />}>
           {/* 추가적인 경로를 정의 */}
           <Route path='main' element = {<MainPage/>}/>
           <Route path="menu" element={<Menu />} />
