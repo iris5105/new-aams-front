@@ -1,13 +1,13 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { Layout, Typography, Flex} from 'antd';
-import {UserOutlined} from '@ant-design/icons';
+import {UserOutlined, BarsOutlined} from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom'; // useNavigate 임포트
 
 const { Text, Title  } = Typography;
 
 
 
-const Header = () => {
+const Header = ({onToggleSider}) => {
     const navigate = useNavigate();
     const handleLogOut = () => {
         sessionStorage.setItem('logInStat', 'false')
@@ -20,6 +20,12 @@ const Header = () => {
         navigate('/main');
     }
 
+    const handleBarsClick = () => {
+        // BarsOutlined 클릭 시 토글
+        onToggleSider(prevState => !prevState);  // 상태를 토글하여 부모로 전달
+      };
+
+
     return (
         <Layout
             style={{
@@ -31,10 +37,12 @@ const Header = () => {
              }}
         >
             <Flex horizontal={true} justify='space-between' align='center'>
-                <Flex horizontal={true} justify='flex-start' align='center' onClick={handleLogo}>
-                    <div className="demo-logo" />
-                    <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
-                    <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
+                <Flex horizontal={true} justify='flex-start' align='center'  >
+                    <BarsOutlined style={{fontSize : '30px', color : 'white', paddingRight : '10px'}} onClick={handleBarsClick} />
+                    <Flex horizontal={true} justify='flex-start' align='center' onClick={handleLogo}>
+                        <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
+                        <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
+                    </Flex>
                 </Flex>
                 <Flex horizontal={true} justify='flex-start' align='center'>
                     <Text style={{color : 'white'}}>사용자 </Text>
