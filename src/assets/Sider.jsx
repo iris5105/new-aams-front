@@ -5,48 +5,48 @@ import {useNavigate, Link } from 'react-router-dom';
 const items = [
   {
     key: '10',
-    label: '자문일일일',
+    label: '자문일일',
     icon: <MailOutlined />,
     children: [
                 {
-                    key: '00',
+                    key: '1000',
                     label: '시스템 수정 및 개발 의회',
-                    value :'Menu'
+                    value :'menu'
                 },
                 {
                     type: 'divider'
                 },                
                 {
-                    key: '01',
+                    key: '1001',
                     label: '회사 기본정보 관리',
-                    value : 'Menu1'
+                    value : 'menu1'
                 },
                 {
                    type: 'divider'
                 },   
                 {
-                    key: '10',
+                    key: '1010',
                     label: '계좌 관리그룹 등록',
-                    value : 'Menu2'
+                    value : 'menu2'
                 },
                 {
-                    key: '11',
+                    key: '1011',
                     label: '계좌 계약정보 관리',
-                    value : 'Menu3'
+                    value : 'menu3'
                 },
                 {
-                    key: '12',
+                    key: '1012',
                     label: '입,출금등록',
                 },
                 {
                     type: 'divider'
                 },   
                 {
-                    key: '21',
+                    key: '1021',
                     label: '현금 매입(종목)등록',
                 },
                 {
-                    key: '22',
+                    key: '1022',
                     label: '체권 매입등록',
                 },
             ],
@@ -57,19 +57,19 @@ const items = [
     icon: <AppstoreOutlined />,
     children: [
                 {
-                    key: '5',
+                    key: '2000',
                     label: 'Option 5',
                 },
                 {
-                    key: '6',
+                    key: '2001',
                     label: 'Option 6',
                 },
                 {
-                key: '7',
+                key: '2002',
                 label: 'Option 7',
                 },
                 {
-                key: '8',
+                key: '2005',
                 label: 'Option 8',
                 },
             ],
@@ -83,19 +83,19 @@ const items = [
     icon: <SettingOutlined />,
     children: [
       {
-        key: '9',
+        key: '3010',
         label: 'Option 9',
       },
       {
-        key: '10',
+        key: '3011',
         label: 'Option 10',
       },
       {
-        key: '11',
+        key: '3012',
         label: 'Option 11',
       },
       {
-        key: '12',
+        key: '3013',
         label: 'Option 12',
       },
     ],
@@ -106,11 +106,11 @@ const items = [
     type: 'group',
     children: [
       {
-        key: '13',
+        key: '4000',
         label: 'Option 13',
       },
       {
-        key: '14',
+        key: '4001',
         label: 'Option 14',
       },
     ],
