@@ -20,7 +20,8 @@ function App() {
   const [logInStat, setLogInStat] = useState(false);
 
   useEffect(() => {
-    const sessionLogin = sessionStorage.getItem('logInStat') === 'true';
+    const sessionLogin = sessionStorage.getItem('logInStat');
+    console.log('loginStat : '+logInStat);
     setLogInStat(sessionLogin);
   }, []);
 
@@ -28,21 +29,20 @@ function App() {
   var afterDay = now.add(3, 'day');
   console.log('now :' + now.format('YYYY-MM-DD'));
   console.log('now :' + afterDay.format('YYYY-MM-DD'));
-
-
+  
   return (
     <BrowserRouter>
       <Routes>
         {/* 로그인 경로 */}
-        <Route path="/Login" element={<Login/>}/>
+        <Route path="/login" element={<Login/>}/>
          {/* 로그인 후 화면 */}
-        <Route path="/" element = {<Main/>}>
+         <Route path="/" element={logInStat ? <Main /> : <Navigate to="/login" />}>
           {/* 추가적인 경로를 정의 */}
-          <Route path='Main' element = {<MainPage/>}/>
-          <Route path="Menu" element={<Menu />} />
-          <Route path="Menu1" element={<Menu1 />} />
-          <Route path="Menu2" element={<Menu2 />} />
-          <Route path="Menu3" element={<Menu3 />} />
+          <Route path='main' element = {<MainPage/>}/>
+          <Route path="menu" element={<Menu />} />
+          <Route path="menu1" element={<Menu1 />} />
+          <Route path="menu2" element={<Menu2 />} />
+          <Route path="menu3" element={<Menu3 />} />
         </Route>
       </Routes>
     </BrowserRouter>

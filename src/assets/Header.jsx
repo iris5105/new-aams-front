@@ -10,11 +10,13 @@ const { Text, Title  } = Typography;
 const Header = () => {
     const navigate = useNavigate();
     const handleLogOut = () => {
-        navigate('/Login');
+        sessionStorage.setItem('logInStat', 'false')
+        navigate('/login');
     }
 
     // 로고,시스템명 클릭스 '/'로 이동동
     const handleLogo = () => {
+
         navigate('/main');
     }
 

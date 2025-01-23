@@ -23,7 +23,7 @@ const Login = () => {
     const navigate = useNavigate();
     const handleLogin = () => {
         sessionStorage.setItem('logInStat', 'true'); // 로그인 상태 저장
-        navigate('/Main')
+        navigate('/main')
       };
 return(
     <Flex style = {{height : '100vh'}} vertical={true} justify = {'center'} align = {'center'}>
