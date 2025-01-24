@@ -5,6 +5,33 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 const items = [
   {
+    key: '00',
+    label: '테스트페이지',
+    icon: <MailOutlined />,
+    children: [
+      {
+        key: '0001',
+        label: '좌우 분할',
+        value: 'temp1'
+      },
+      {
+        key: '0002',
+        label: '상,좌우',
+        value: 'temp2'
+      },
+      {
+        key: '0003',
+        label: '좌,상하',
+        value: 'temp3'
+      },
+      {
+        key: '0004',
+        label: '상하,우',
+        value: 'temp4'
+      },
+    ],
+  },
+  {
     key: '10',
     label: '자문일일',
     icon: <MailOutlined />,

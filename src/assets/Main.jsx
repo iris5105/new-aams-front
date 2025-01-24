@@ -18,15 +18,15 @@ const Main = () => {
                     </Splitter.Panel>
                     <Splitter.Panel
                       style={{
-                        margin: '16px',
-                        padding: 24,
+                        // margin: '16px',
+                        padding: 0,
                         background: 'white',
-                        borderRadius: 20,
+                        // borderRadius: 20,
                         width: '80%',
                       }}
                     >
 
-                    <Outlet></Outlet>
+                    <Outlet ></Outlet>
                     </Splitter.Panel>
                   </Splitter>
                 </Layout>

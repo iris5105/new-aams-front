@@ -9,6 +9,10 @@ import Menu from './pages/test/Menu';
 import Menu1 from './pages/test/Menu1';
 import Menu2 from './pages/test/Menu2';
 import Menu3 from './pages/test/Menu3';
+import Temp1 from './pages/Sample/Temp1';
+import Temp2 from './pages/Sample/Temp2';
+import Temp3 from './pages/Sample/Temp3';
+import Temp4 from './pages/Sample/Temp4';
 import MainPage from './pages/test/MainPage';
 
 
@@ -50,6 +54,10 @@ function App() {
           <Route path="menu1" element={<Menu1 />} />
           <Route path="menu2" element={<Menu2 />} />
           <Route path="menu3" element={<Menu3 />} />
+          <Route path="temp1" element={<Temp1 />} />
+          <Route path="temp2" element={<Temp2 />} />
+          <Route path="temp3" element={<Temp3 />} />
+          <Route path="temp4" element={<Temp4 />} />
         </Route>
       </Routes>
     </BrowserRouter>

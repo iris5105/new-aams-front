@@ -60,14 +60,23 @@ const ButtonDisplay =[
       {   key : 'excel',
         label : '엑셀',
         value : 1
-      }    
-      
+      }
     // 1,1,1,1,1,1,1,1
 ]
-const items = [
+const CompAuth = [
 
 
 ]
+const usrAuth = [
+
+]
+const DspBtn = [
+
+]
+
+
+
+
 
 function Basicbutton() {
     // authority와 ButtonDisplay 비교하여 렌더링할 버튼 필터링
@@ -75,11 +84,16 @@ function Basicbutton() {
       const authItem = authority.find((auth) => auth.key === button.key);
       return authItem && authItem.value === 1;
     });
+
+    const handleBtnClick =(value)=>{
+      console.log(value)
+      
+    };
   
     return (
-      <Flex horizontal={true} gap="small">
+      <Flex horizontal={true} gap="small" style={{borderBottom : " 1px solid ", padding : '5px'}}>
         {buttonsToDisplay.map((button) => (
-          <Button key={button.key}>{button.label}</Button>
+          <Button className='CommonBtn' style={{ width : 60}} key={button.key} onClick={()=>handleBtnClick(button.label)}>{button.label}</Button>
         ))}
       </Flex>
     );
