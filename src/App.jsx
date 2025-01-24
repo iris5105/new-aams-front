@@ -17,14 +17,16 @@ const { Text } = Typography;
 
 
 function App() {
-  const [logInStat, setLogInStat] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // 세션에서 로그인 상태 확인
   useEffect(() => {
-    const sessionLogin = sessionStorage.getItem('logInStat');
-    console.log('loginStat : '+logInStat);
-    setLogInStat(sessionLogin);
+    const sessionKey = sessionStorage.getItem('isLoggedIn');
+    if (sessionKey === 'true') {
+      setIsLoggedIn(true);
+    }
   }, []);
-  console.log('loginStat : '+logInStat);
+
   var now = dayjs();
   var afterDay = now.add(3, 'day');
   console.log('now :' + now.format('YYYY-MM-DD'));
@@ -34,10 +36,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* 로그인 경로 */}
-        <Route path="/login" element={<Login/>}/>
+        {/* <Route path="/login" element={<Login/>}/> */}
+        <Route path="/login" element={<Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
          {/* 로그인 후 화면 */}
-         {/* <Route path="/main" element={logInStat ? <Main /> : <Navigate to="/login" />}> */}
-         <Route path="/" element={ <Main />}>
+         <Route
+          path="/"
+          element={isLoggedIn ? <Main /> : <Navigate to="/login" />}
+        >
+         {/* <Route path="/" element={ <Main />}> */}
           {/* 추가적인 경로를 정의 */}
           <Route path='main' element = {<MainPage/>}/>
           <Route path="menu" element={<Menu />} />

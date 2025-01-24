@@ -8,8 +8,9 @@ import Filter from '../../component/filters/Filter'
 const { Text } = Typography;
 export const MainPage = () => {
   return (
+
     <Layout style = {{ height : '100%'}}>
-        <Layout style={{width : 300 }}>
+        <Layout style={{width : 300 }} >
             <Text id="Example">Components Sample</Text>
             <Text>Button</Text>
             <BscBtn/>

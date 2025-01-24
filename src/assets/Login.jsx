@@ -1,16 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Typography, Button, Checkbox, Form, Input, Flex, Image } from 'antd';
 import Logo from './image/aams.logo.jpg';
 import { useNavigate } from 'react-router-dom';
 const { Text, Title} = Typography;
 
-const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-  
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+
 
 const boxStyle = {
     borderRadius: 50,
@@ -19,12 +13,25 @@ const boxStyle = {
     width : 500
     
   };
-const Login = () => {
+const Login = ({ onLoginSuccess }) => {
     const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     const handleLogin = () => {
-        sessionStorage.setItem('logInStat', true); // 로그인 상태 저장
-        navigate('/main')
-      };
+        console.log('username', username);
+        console.log('password', password);
+      // 로그인 로직 (예: username과 password가 올바른지 체크)
+      if (username === 'admin' && password === '1111') {
+        // 로그인 성공 시 sessionStorage에 로그인 상태 저장
+        sessionStorage.setItem('isLoggedIn', 'true');
+        onLoginSuccess();  // 부모 컴포넌트에게 로그인 성공을 알림
+        navigate('/');  // 메인 페이지로 이동
+      } else {
+        alert('잘못된 로그인 정보입니다.');
+      }
+    };
+
 return(
     <Flex style = {{height : '100vh'}} vertical={true} justify = {'center'} align = {'center'}>
         <Flex style = {boxStyle} vertical={true} justify = {'center'} align = {'center'}>
@@ -36,8 +43,7 @@ return(
                 wrLoginerCol={{span: 16}}
                 style={{maxWidth: 400}}
                 initialValues={{remember: true}}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                onFinish={handleLogin}
                 autoComplete="off"
             >
                 <Form.Item
@@ -49,7 +55,7 @@ return(
                             },
                             ]}
                 >
-                    <Input/>
+                    <Input alue={username} onChange={(e) => setUsername(e.target.value)} />
                 </Form.Item>
 
                 <Form.Item
@@ -61,7 +67,7 @@ return(
                             },
                             ]}
                 >
-                    <Input.Password />
+                    <Input.Password value={password} onChange={(e) => setPassword(e.target.value) }/>
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked" label={null}>
@@ -69,7 +75,7 @@ return(
                 </Form.Item>
 
                 <Form.Item label={null}>
-                    <Button type="primary" onClick={handleLogin}>
+                    <Button id='Login' type="primary" htmlType="submit">
                     Log In
                     </Button>
                 </Form.Item>
