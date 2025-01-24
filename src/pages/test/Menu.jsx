@@ -6,7 +6,7 @@ const Menu = () => {
   return (
     <div>
         <div>menu</div>
-        <Link to='/'>
+        <Link to='/main'>
         Go to Main
         </Link>
     </div>

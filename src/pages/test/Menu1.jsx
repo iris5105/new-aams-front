@@ -13,9 +13,6 @@ function Menu1() {
                 <BscBtn/>
             </Flex>
         </Layout>
-    <Link to='/'>
-    Go to Main
-    </Link>
     </Layout>
 
   )

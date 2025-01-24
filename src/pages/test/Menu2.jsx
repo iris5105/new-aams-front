@@ -8,11 +8,6 @@ function Menu2() {
     <h3>Menu2</h3>
     <BscDatePicker/>
     <div>
-      <Link to='/'>
-      Go to Main
-      </Link>
-    </div>
-    <div>
       <RangeDatePicker/>
     </div>
   </div>
