@@ -20,12 +20,6 @@ const Header = ({onToggleSider}) => {
         navigate('/main');
     }
 
-    const handleBarsClick = () => {
-        // BarsOutlined 클릭 시 토글
-        onToggleSider(prevState => !prevState);  // 상태를 토글하여 부모로 전달
-      };
-
-
     return (
         <Layout
             style={{
@@ -38,7 +32,6 @@ const Header = ({onToggleSider}) => {
         >
             <Flex horizontal={true} justify='space-between' align='center'>
                 <Flex horizontal={true} justify='flex-start' align='center'  >
-                    <BarsOutlined style={{fontSize : '30px', color : 'white', paddingRight : '10px'}} onClick={handleBarsClick} />
                     <Flex horizontal={true} justify='flex-start' align='center' onClick={handleLogo}>
                         <Title  level = {2} italic style={{color : 'yellow', marginTop : '10px'}}>A</Title>
                         <Title  level = {4} style={{color : 'white', marginTop : '10px'}}>dvanced Asset Management System.</Title>
