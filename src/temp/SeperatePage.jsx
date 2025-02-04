@@ -1,20 +1,34 @@
-import React from 'react'
+import React, {useState, useLayoutEffect, useRef} from 'react'
 import { Splitter, Layout, Typography } from 'antd'
 
 const { Text } = Typography;
-const LR = ({ children }) => {
-    const [leftChild, rightChild] = children;
+
+
+
+const LR = () => {
+    // const [leftChild, rightChild] = children;
+    // return (
+    //     <Splitter>
+    //         <Splitter.Panel>
+    //             {leftChild || <Text>Left</Text>}
+    //         </Splitter.Panel>
+    //         <Splitter.Panel>
+    //         {rightChild || <Text>Left</Text>}
+    //         </Splitter.Panel>
+    //     </Splitter>
+    // )
     return (
         <Splitter>
             <Splitter.Panel>
-                {leftChild || <Text>Left</Text>}
+                <Text>Left</Text>
             </Splitter.Panel>
             <Splitter.Panel>
-            {rightChild || <Text>Left</Text>}
+                <Text>Right</Text>
             </Splitter.Panel>
         </Splitter>
     )
 }
+
 
 const TB = () => {
     return (
@@ -28,25 +42,38 @@ const TB = () => {
         </Splitter>
     )
   }
-const LTB = ({ children }) => {
+  const LTB = ({ prop, children, onSizeChange }) => {
     const [leftChild, topChild, bottomChild] = children;
+    const bottomPanelRef = useRef(null);
+
+    const handleResize = (newSizes) => {
+        if (onSizeChange) {
+            onSizeChange(newSizes); // Temp3에서 setSizes를 호출하도록 전달
+        }
+    };    
     return (
         <Splitter>
-            <Splitter.Panel>
+            <Splitter.Panel min='100' style={{ height: prop }}>
                 {leftChild || <Text>Left</Text>}
             </Splitter.Panel>
-            <Splitter.Panel>
-                <Splitter layout='vertical'>
-                    <Splitter.Panel>
-                    {topChild ||<Text>Top</Text> }
+            <Splitter.Panel min='100'>
+                <Splitter id='verticalSplitter' layout='vertical' onResize={handleResize}>
+                    <Splitter.Panel defaultSize={'50%'} min='100'>
+                        {topChild || <Text>Top</Text>}
                     </Splitter.Panel>
-                    <Splitter.Panel>
-                    { bottomChild|| <Text>Bottom</Text>}
+                    <Splitter.Panel
+                        id='BottomPanel'
+                        defaultSize={'50%'}
+                        ref={bottomPanelRef} // Reference the BottomPanel
+                        style={{ overflow: 'hidden' }}
+                        min='100'
+                    >
+                        {bottomChild || <Text>Bottom</Text>}
                     </Splitter.Panel>
                 </Splitter>
             </Splitter.Panel>
         </Splitter>
-    )
+    );
 }
 
 const TBR = () => {
