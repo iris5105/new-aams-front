@@ -1,5 +1,6 @@
 import React , {useState, useEffect, useRef} from 'react';
 import { Table, Layout } from 'antd';
+import { CLSThresholds } from 'web-vitals';
 
 const columns = [
   {
@@ -133,61 +134,43 @@ const dataSource = Array.from({
   age: 32,
   address: `London, Park Lane no. ${i}`,
 }));
-
-// const BasicTable = () => {
-//   return (
-//     <Layout>
-//       <Table
-//         pagination={false}
-//         columns={columns}
-//         dataSource={dataSource}
-//         scroll={{
-//           x: 'max-content',
-//           y : '85vh'
-//         }}
-//       />
-//     </Layout>
-//   );
-// };
-// export default BasicTable;
 const BasicTable = () => {
-  const [tableHeight, setTableHeight] = useState(0);
-  const splitterPanelRef = useRef(null); // ant-splitter-panel 요소에 대한 ref
+
+    const [wdHeight, setWdHeight] = useState(window.innerHeight);
+    const [tableHeight, setTableHeight] = useState(wdHeight-63);
+  
+  
+  
+  useEffect(() => {
+    // 윈도우 크기가 변경될 때마다 실행되는 함수
+    const handleResize = () => {
+      setWdHeight(window.innerHeight);
+    };
+  
+    // 리사이즈 이벤트 리스너 추가
+    window.addEventListener('resize', handleResize);
+  
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
-    const updateTableHeight = () => {
-      // splitterPanelRef로 참조한 요소의 높이를 가져와서 테이블 높이를 설정
-      if (splitterPanelRef.current) {
-        const height = splitterPanelRef.current.clientHeight - 100; // 여백을 고려하여 높이 설정
-        setTableHeight(height);
-      }
-    };
-
-    // 초기 계산
-    updateTableHeight();
-
-    // 화면 크기 변경 시에도 반영
-    window.addEventListener('resize', updateTableHeight);
-
-    // 컴포넌트 언마운트 시 이벤트 리스너 정리
-    return () => {
-      window.removeEventListener('resize', updateTableHeight);
-    };
-  }, [splitterPanelRef]); // 빈 배열을 넣어 처음 한 번만 실행되게 함
+    setTableHeight(wdHeight - 120); // wdHeight가 변경될 때마다 tableHeight 업데이트
+  }, [wdHeight]);
 
   return (
     <Layout>
-      <div ref={splitterPanelRef} className="ant-splitter-panel" style={{ height: '100%' }}>
         <Table
           pagination={false}
           columns={columns}
           dataSource={dataSource}
           scroll={{
             x: 'max-content',
-            y: tableHeight, // splitter-panel의 높이를 기반으로 설정된 테이블 높이
+            y : tableHeight
           }}
         />
-      </div>
     </Layout>
   );
 };
