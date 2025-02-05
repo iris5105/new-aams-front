@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { Table, Flex } from 'antd';
+import ResizeObserver from 'resize-observer-polyfill';
 
 const columns = [
   {
@@ -100,18 +101,43 @@ const dataSource = Array.from({
 }));
 
 const DataTable = ({prop, size}) => {
-  const [tableHeight, setTableHeight] = useState(0);
-  console.log('prop',prop);
-  
-  useEffect(() => {
-    setTableHeight(size-150);
-    console.log('income : ',size)
-  }, [size])
+  const [tableHeight, setTableHeight] = useState(0);  
+  // useEffect(() => {
+  //   const size1 = size[0];
+  //   const size2 = size[1];
+  //   if((size1+size2-150) > prop){
+  //     setTableHeight(size2-((size1+size2-150)-prop))
+  //   }else{
+  //     setTableHeight(size2-150);
+  //   }
+    
+  //   console.log('income : ',prop, size)
+  // }, [size,prop])
 
-//     useEffect(() => {
-//         setTableHeight(prop)
-//     }, [prop]);
-// console.log('tableHeight :',tableHeight);
+  useEffect(() => {
+    const updateTableHeight = () => {
+      const windowHeight = window.innerHeight;
+      const maxTableHeight = windowHeight-63; // 헤더, 푸터 등을 고려한 여유 공간
+      const size1 = size[0];
+      const size2 = size[1];
+
+      let newHeight = size2 - 153;
+      if (size1 + size2 - 153 > prop) {
+        newHeight = size2 - ((size1 + size2 - 153) - prop);
+      }
+
+      setTableHeight(Math.min(newHeight, maxTableHeight)); // 화면을 벗어나지 않도록 제한
+      console.log('newHeight :', newHeight);
+      console.log('maxTableHeight :', maxTableHeight);
+    };
+
+    updateTableHeight(); // 초기 실행
+    window.addEventListener("resize", updateTableHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateTableHeight); // 클린업
+    };
+  }, [size, prop]);
 
 console.log('setSized:', tableHeight);
 
@@ -121,7 +147,6 @@ console.log('setSized:', tableHeight);
         columns={columns}
         dataSource={dataSource}
         size="small"
-        // ref={tableContainerRef} 
          style={{ height:tableHeight,}}
         scroll={{
           x: 'max-content',
