@@ -101,26 +101,16 @@ const dataSource = Array.from({
 }));
 
 const SampleTable2 = ({size}) => {
-  const [tableHeight, setTableHeight] = useState(0);  
-  // useEffect(() => {
-  //   const size1 = size[0];
-  //   const size2 = size[1];
-  //   if((size1+size2-150) > prop){
-  //     setTableHeight(size2-((size1+size2-150)-prop))
-  //   }else{
-  //     setTableHeight(size2-150);
-  //   }
-    
-  //   console.log('income : ',prop, size)
-  // }, [size,prop])
+  const [tableHeight, setTableHeight] = useState(0);
+  const [theadHeight, setTheadHeight] = useState(0);
+  const theadRef = useRef(null);
 
   useEffect(() => {
     const updateTableHeight = () => {
       const windowHeight = window.innerHeight;
-      const maxTableHeight = windowHeight-63; // 헤더, 푸터 등을 고려한 여유 공간
-      // const size1 = size[0];
-      // const size2 = size[1];
-      let newHeight = size - 153;
+      const maxTableHeight = windowHeight - 63; // 헤더, 푸터 등을 고려한 여유 공간
+      let newHeight = size - theadHeight;
+      console.log('newHeight :', newHeight);
 
       setTableHeight(Math.min(newHeight, maxTableHeight)); // 화면을 벗어나지 않도록 제한
       console.log('newHeight :', newHeight);
@@ -128,12 +118,20 @@ const SampleTable2 = ({size}) => {
     };
 
     updateTableHeight(); // 초기 실행
-    window.addEventListener("resize", updateTableHeight);
+    window.addEventListener('resize', updateTableHeight);
 
     return () => {
-      window.removeEventListener("resize", updateTableHeight); // 클린업
+      window.removeEventListener('resize', updateTableHeight); // 클린업
     };
-  }, [size]);
+  }, [size, theadHeight]);
+
+  useEffect(() => {
+    if (theadRef.current) {
+      const theadHeight = theadRef.current.offsetHeight;
+      setTheadHeight(theadHeight);
+      console.log('theadHeight:', theadHeight);
+    }
+  }, []);
 
 console.log('setSized:', tableHeight);
 
@@ -142,6 +140,11 @@ console.log('setSized:', tableHeight);
         pagination={false}
         columns={columns}
         dataSource={dataSource}
+        components={{
+          header: {
+            wrapper: (props) => <thead ref={theadRef} {...props} />,
+          },
+        }}
         size="small"
          style={{ height:tableHeight,}}
         scroll={{
