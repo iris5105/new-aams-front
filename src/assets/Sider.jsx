@@ -11,12 +11,12 @@ const items = [
     children: [
       {
         key: '0001',
-        label: '좌우 분할',
+        label: '화면 분할1',
         value: 'temp1'
       },
       {
         key: '0002',
-        label: '상,좌우',
+        label: '화면 분할2',
         value: 'temp2'
       },
       {
@@ -145,7 +145,7 @@ const items = [
   },
 ];
 
-export default function Sider() {
+export default function Sider({contentHeight}) {
 
   const navigate = useNavigate();
   const [selectedKeys, setSelectedKeys] = useState([]);
@@ -176,6 +176,7 @@ export default function Sider() {
       </Tooltip>
     );
   };
+
   //menu의 리스트 생성
   const renderMenuItems = (items) => {
     return items.map(item => {
@@ -201,7 +202,7 @@ export default function Sider() {
      if = "sider"
       style={{
         overflow: 'auto',
-        height: '93vh',
+        height: contentHeight ? contentHeight : '93vh',
         insetInlineStart: 0,
         top: 0,
         bottom: 0,
