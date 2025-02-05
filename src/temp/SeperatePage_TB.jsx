@@ -1,44 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import { Splitter,  Typography } from 'antd'
+const { Text } = Typography;
 
-const SeperatePage_TB = () => {
-  const [topHeight, setTopHeight] = useState(50); // 위쪽 화면의 비율
-  const resizerRef = useRef(null);
-  const containerRef = useRef(null);
+const SeperatePage_TB = ({prop, children = [], onSizeChange}) => {
+  const [ topChild, bottomChild] = children;
+  // const bottomPanelRef = useRef(null);
 
-  const handleMouseDown = (e) => {
-    const startY = e.clientY;
-    const startTopHeight = topHeight;
-
-    const handleMouseMove = (moveEvent) => {
-      const diffY = moveEvent.clientY - startY;
-      const newTopHeight = Math.min(Math.max(startTopHeight + (diffY / containerRef.current.clientHeight) * 100, 10), 90);
-      setTopHeight(newTopHeight);
-    };
-
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
+  const handleResize = (newSizes) => {
+      if (onSizeChange) {
+          onSizeChange(newSizes); // Temp3에서 setSizes를 호출하도록 전달
+      }
+  };  
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh' }}>
-      <div style={{ height: `${topHeight}%`, backgroundColor: 'lightblue' }}>위쪽 화면</div>
-      <div
-        ref={resizerRef}
-        onMouseDown={handleMouseDown}
-        style={{
-          cursor: 'row-resize',
-          height: '5px',
-          backgroundColor: '#aaa',
-        }}
-      />
-      <div style={{ height: `${100 - topHeight}%`, backgroundColor: 'lightgreen' }}>아래쪽 화면</div>
-    </div>
+    <Splitter layout='vertical' onResize={handleResize}>
+      <Splitter.Panel defaultSize={'50%'} min='100'>
+          {topChild || <Text>Top</Text>}
+      </Splitter.Panel>
+      <Splitter.Panel
+          id='BottomPanel'
+          defaultSize={'50%'}
+          style={{ overflow: 'hidden' }}
+          min='100'
+      >
+          {bottomChild || <Text>Bottom</Text>}
+      </Splitter.Panel>
+    </Splitter>
   );
 };
 
 export default SeperatePage_TB;
+

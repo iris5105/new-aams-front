@@ -1,43 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useLayoutEffect, useRef} from 'react'
+import { Splitter, Layout, Typography } from 'antd'
 
-const SeperatePage_LR = () => {
-  const [leftWidth, setLeftWidth] = useState(50); // 왼쪽 화면의 비율
-  const resizerRef = useRef(null);
-  const containerRef = useRef(null);
+const { Text } = Typography;
 
-  const handleMouseDown = (e) => {
-    const startX = e.clientX;
-    const startLeftWidth = leftWidth;
-
-    const handleMouseMove = (moveEvent) => {
-      const diffX = moveEvent.clientX - startX;
-      const newLeftWidth = Math.min(Math.max(startLeftWidth + (diffX / containerRef.current.clientWidth) * 100, 10), 90);
-      setLeftWidth(newLeftWidth);
-    };
-
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
+const SeperatePage_LR = ({prop, children = [], onSizeChange}) => {
+  const [leftChild, rightChild] = children;
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', width: '100%', height: '100vh' }}>
-      <div style={{ width: `${leftWidth}%`, backgroundColor: 'lightblue' }}>왼쪽 화면</div>
-      <div
-        ref={resizerRef}
-        onMouseDown={handleMouseDown}
-        style={{
-          cursor: 'col-resize',
-          width: '5px',
-          backgroundColor: '#aaa',
-        }}
-      />
-      <div style={{ width: `${100 - leftWidth}%`, backgroundColor: 'lightgreen' }}>오른쪽 화면</div>
-    </div>
+    <Splitter>
+    <Splitter.Panel>
+       {leftChild || <Text>Left</Text> }
+    </Splitter.Panel>
+    <Splitter.Panel>
+      {rightChild || <Text>Right</Text> }
+    </Splitter.Panel>
+</Splitter>
   );
 };
 

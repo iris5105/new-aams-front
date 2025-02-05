@@ -1,5 +1,5 @@
-import React, {useState, useLayoutEffect, useRef} from 'react'
-import { Splitter, Layout, Typography } from 'antd'
+import React from 'react'
+import { Splitter,  Typography } from 'antd'
 
 const { Text } = Typography;
 
@@ -42,9 +42,9 @@ const TB = () => {
         </Splitter>
     )
   }
-  const LTB = ({ prop, children, onSizeChange }) => {
+  const LTB = ({ prop, children = [], onSizeChange }) => {
     const [leftChild, topChild, bottomChild] = children;
-    const bottomPanelRef = useRef(null);
+    // const bottomPanelRef = useRef(null);
 
     const handleResize = (newSizes) => {
         if (onSizeChange) {
@@ -57,14 +57,14 @@ const TB = () => {
                 {leftChild || <Text>Left</Text>}
             </Splitter.Panel>
             <Splitter.Panel min='100'>
-                <Splitter id='verticalSplitter' layout='vertical' onResize={handleResize}>
+                <Splitter layout='vertical' onResize={handleResize}>
                     <Splitter.Panel defaultSize={'50%'} min='100'>
                         {topChild || <Text>Top</Text>}
                     </Splitter.Panel>
                     <Splitter.Panel
                         id='BottomPanel'
                         defaultSize={'50%'}
-                        ref={bottomPanelRef} // Reference the BottomPanel
+                        // ref={bottomPanelRef} // Reference the BottomPanel
                         style={{ overflow: 'hidden' }}
                         min='100'
                     >
