@@ -1,24 +1,24 @@
 import React,{useState, useEffect} from 'react'
 import { Layout } from 'antd'
 import BasicTable from '../../component/table/BasicTable'
-import DataTable from '../../component/table/DataTable';
 import {LTB} from '../../temp/SeperatePage';
+import SeperatePage_LTB from '../../temp/SeperatePage_LTB';
 import Basicbutton from '../../component/button/Basicbutton';
+import DataTable from '../../component/table/DataTable';
 
 const Temp3 = () => {
   const [wdHeight, setWdHeight] = useState(window.innerHeight);
-  const [tableHeight, setTableHeight] = useState(wdHeight-63);
-  
+  const [boardHeight, setBoardHeight] = useState(wdHeight-63);
 
-  const basicButtonHeight = tableHeight * 0.1; // 예: BasicButton 높이는 10%
-  const dataTableHeight = tableHeight * 0.9; // 예: DataTable 높이는 90%
-  const [sizes, setSizes] = useState([tableHeight * 0.5,tableHeight * 0.5]);
+  const [sizes, setSizes] = useState([boardHeight * 0.5,boardHeight * 0.5]);
 
 
 useEffect(() => {
   // 윈도우 크기가 변경될 때마다 실행되는 함수
   const handleResize = () => {
     setWdHeight(window.innerHeight);
+    console.log('wdHeight: ', window.innerHeight);
+    
   };
 
   // 리사이즈 이벤트 리스너 추가
@@ -34,16 +34,16 @@ console.log('sizes',sizes);
 
 
 useEffect(() => {
-  setTableHeight(wdHeight - 63); // wdHeight가 변경될 때마다 tableHeight 업데이트
+  setBoardHeight(wdHeight - 63); // wdHeight가 변경될 때마다 tableHeight 업데이트
 }, [wdHeight]);
 
   return (
     <Layout>
-      <LTB prop = {tableHeight} onSizeChange={setSizes}>
+      <SeperatePage_LTB prop = {boardHeight} onSizeChange={setSizes}>
         <BasicTable />
-        <Basicbutton size={sizes[0]}/>
-        <DataTable prop={tableHeight}  size={sizes[1]}/>
-      </LTB>
+        <Basicbutton />
+        <DataTable prop={boardHeight}  size={sizes}/>
+      </SeperatePage_LTB>
     </Layout>
   )
 }
