@@ -1,11 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import { Layout } from 'antd'
-import BasicTable from '../../component/table/BasicTable'
 import {LTB} from '../../temp/SeperatePage';
 import SeperatePage_LTB from '../../temp/SeperatePage_LTB';
 import Basicbutton from '../../component/button/Basicbutton';
-import DataTable from '../../component/table/DataTable';
-
+import SampleTable1 from '../../component/table/SampleTable1';
+import SampleTable2 from '../../component/table/SampleTable2';
 const Temp3 = () => {
   const [wdHeight, setWdHeight] = useState(window.innerHeight);
   const [boardHeight, setBoardHeight] = useState(wdHeight-63);
@@ -40,9 +39,9 @@ useEffect(() => {
   return (
     <Layout>
       <SeperatePage_LTB prop = {boardHeight} onSizeChange={setSizes}>
-        <BasicTable />
+        <SampleTable1 />
         <Basicbutton />
-        <DataTable prop={boardHeight}  size={sizes}/>
+        <SampleTable2 prop={boardHeight}  size={sizes}/>
       </SeperatePage_LTB>
     </Layout>
   )
