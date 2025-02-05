@@ -134,7 +134,7 @@ const dataSource = Array.from({
   age: 32,
   address: `London, Park Lane no. ${i}`,
 }));
-const BasicTable = () => {
+const SampleTable1 = ({ prop={}, sizes =[]}) => {
 
     const [wdHeight, setWdHeight] = useState(window.innerHeight);
     const [tableHeight, setTableHeight] = useState(wdHeight-63);
@@ -160,6 +160,14 @@ const BasicTable = () => {
     setTableHeight(wdHeight - 120); // wdHeight가 변경될 때마다 tableHeight 업데이트
   }, [wdHeight]);
 
+  useEffect(() => {
+    if(sizes.length > 0) {
+    const size1 = sizes[0];
+    const size2 = sizes[1];
+    setTableHeight(size1);
+  }
+  }, [sizes]);
+
   return (
     <Layout>
         <Table
@@ -175,4 +183,4 @@ const BasicTable = () => {
   );
 };
 
-export default BasicTable;
+export default SampleTable1;

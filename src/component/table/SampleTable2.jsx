@@ -100,7 +100,7 @@ const dataSource = Array.from({
   gender: 'M',
 }));
 
-const DataTable = ({prop, size}) => {
+const SampleTable2 = ({prop, size}) => {
   const [tableHeight, setTableHeight] = useState(0);  
   // useEffect(() => {
   //   const size1 = size[0];
@@ -156,4 +156,4 @@ console.log('setSized:', tableHeight);
   );
 };
 
-export default DataTable;
+export default SampleTable2;
