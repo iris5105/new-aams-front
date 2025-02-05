@@ -32,10 +32,7 @@ function App() {
   }, []);
 
   var now = dayjs();
-  var afterDay = now.add(3, 'day');
-  console.log('now :' + now.format('YYYY-MM-DD'));
-  console.log('now :' + afterDay.format('YYYY-MM-DD'));
-  
+  var afterDay = now.add(3, 'day');  
   return (
     <BrowserRouter>
       <Routes>
