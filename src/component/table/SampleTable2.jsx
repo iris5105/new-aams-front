@@ -100,7 +100,7 @@ const dataSource = Array.from({
   gender: 'M',
 }));
 
-const SampleTable2 = ({prop, size}) => {
+const SampleTable2 = ({size}) => {
   const [tableHeight, setTableHeight] = useState(0);  
   // useEffect(() => {
   //   const size1 = size[0];
@@ -118,13 +118,9 @@ const SampleTable2 = ({prop, size}) => {
     const updateTableHeight = () => {
       const windowHeight = window.innerHeight;
       const maxTableHeight = windowHeight-63; // 헤더, 푸터 등을 고려한 여유 공간
-      const size1 = size[0];
-      const size2 = size[1];
-
-      let newHeight = size2 - 153;
-      if (size1 + size2 - 153 > prop) {
-        newHeight = size2 - ((size1 + size2 - 153) - prop);
-      }
+      // const size1 = size[0];
+      // const size2 = size[1];
+      let newHeight = size - 153;
 
       setTableHeight(Math.min(newHeight, maxTableHeight)); // 화면을 벗어나지 않도록 제한
       console.log('newHeight :', newHeight);
@@ -137,7 +133,7 @@ const SampleTable2 = ({prop, size}) => {
     return () => {
       window.removeEventListener("resize", updateTableHeight); // 클린업
     };
-  }, [size, prop]);
+  }, [size]);
 
 console.log('setSized:', tableHeight);
 
@@ -155,5 +151,4 @@ console.log('setSized:', tableHeight);
       />
   );
 };
-
 export default SampleTable2;

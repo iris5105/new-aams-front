@@ -34,13 +34,15 @@ console.log('sizes',sizes);
 
 
 useEffect(() => {
-  setBoardHeight(wdHeight - 63); // wdHeight가 변경될 때마다 tableHeight 업데이트
+  setBoardHeight(wdHeight); // wdHeight가 변경될 때마다 tableHeight 업데이트
 }, [wdHeight]);
   return (
     <Layout>
       <SeperatePage_TBR prop = {boardHeight} onSizeChange={setSizes}>
-        <SampleTable1  prop={boardHeight}  size={sizes}/>
-        <SampleTable2 prop={boardHeight}  size={sizes}/>
+        <SampleTable1 size={(sizes[0]-55)}/>
+        {/* <SampleTable1 style={{height : sizes[0]}}/> */}
+        <SampleTable2 size={sizes[1]-59}/>
+        {/* <SampleTable2 style={{height : sizes[1]}}/> */}
         <Basicbutton />
       </SeperatePage_TBR>
     </Layout>

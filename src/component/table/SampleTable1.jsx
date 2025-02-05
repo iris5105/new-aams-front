@@ -134,7 +134,7 @@ const dataSource = Array.from({
   age: 32,
   address: `London, Park Lane no. ${i}`,
 }));
-const SampleTable1 = ({ prop={}, sizes =[]}) => {
+const SampleTable1 = ({ size ={}}) => {
 
     const [wdHeight, setWdHeight] = useState(window.innerHeight);
     const [tableHeight, setTableHeight] = useState(wdHeight-63);
@@ -161,12 +161,15 @@ const SampleTable1 = ({ prop={}, sizes =[]}) => {
   }, [wdHeight]);
 
   useEffect(() => {
-    if(sizes.length > 0) {
-    const size1 = sizes[0];
-    const size2 = sizes[1];
-    setTableHeight(size1);
+    if(size > 0) {
+    setTableHeight(size);
   }
-  }, [sizes]);
+  }, [size]);
+
+
+  console.log('SampleTable1 size:', size);
+  console.log('SampleTable1 TableHeight:', tableHeight);
+  
 
   return (
     <Layout>

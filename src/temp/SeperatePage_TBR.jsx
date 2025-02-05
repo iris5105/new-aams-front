@@ -10,7 +10,7 @@ const SeperatePage_TBR = ({ prop, children = [], onSizeChange }) => {
 
   const handleResize = (newSizes) => {
     console.log('newSizes:',newSizes);
-    const size1 = newSizes[0]
+    const size1 = newSizes[0];
     const size2 = newSizes[1]
     setPanelSize(newSizes);
       if (onSizeChange) {
@@ -20,19 +20,19 @@ const SeperatePage_TBR = ({ prop, children = [], onSizeChange }) => {
 
   return (
   <Splitter>
-    <Splitter.Panel min='100'>
-        <Splitter layout='vertical' onResize={handleResize}>
-            <Splitter.Panel 
+    <Splitter.Panel min='100' style={{ height: prop, overflow: 'hidden' }}>
+        <Splitter layout='vertical' onResize={handleResize} style={{ overflow: 'hidden' }} >
+            <Splitter.Panel
+                defaultSize={'50%'}
                 min='100'
-                size = {panelSize[0]}
-                style={{ overflow: 'hidden' }}>
+                >
                 {topChild || <Text>Top</Text>}
             </Splitter.Panel>
             <Splitter.Panel
                 id='BottomPanel'
-                size = {panelSize[1]}
+                defaultSize={'50%'}
                 // ref={bottomPanelRef} // Reference the BottomPanel
-                style={{ overflow: 'hidden' }}
+                 style={{ overflow: 'hidden' }}
                 min='100'
             >
                 {bottomChild || <Text>Bottom</Text>}
